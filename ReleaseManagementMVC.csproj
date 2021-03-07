@@ -130,6 +130,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\TeamLeaderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -138,12 +139,13 @@
     <Compile Include="Models\Developer.cs" />
     <Compile Include="Models\dropbox\Roles.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeTeamAssignment.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ReleaseManagementContext.cs" />
     <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\temp\AssignProject.cs" />
+    <Compile Include="Models\temp\Assignproject.cs" />
     <Compile Include="Models\temp\Registration.cs" />
     <Compile Include="Models\temp\RegProject.cs" />
     <Compile Include="Models\Tester.cs" />
@@ -154,6 +156,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -194,9 +197,11 @@
     <Content Include="Views\Manager\AddProject2.cshtml" />
     <Content Include="Views\Manager\AddProject3.cshtml" />
     <Content Include="Views\Manager\AddProject.cshtml" />
+    <Content Include="Views\Manager\AssignProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\TeamLeader\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

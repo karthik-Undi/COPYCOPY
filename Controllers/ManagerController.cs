@@ -20,6 +20,14 @@ namespace ReleaseManagementMVC.Controllers
             return View();
         }
 
+        public ActionResult Assign(string Assignproj,string tid)
+
+        {
+
+            //dbcontext.Projects.
+            return View();
+        }
+
         public ActionResult AddProject()
         {
             var l = dbcontext.Teams.ToList();
@@ -47,16 +55,50 @@ namespace ReleaseManagementMVC.Controllers
         }
 
 
-        public ActionResult AssignProject(RegProject regProject)
+        public ActionResult AssignProject()
         {
+            var projlist = dbcontext.Projects.Where(proj=>proj.ProjectStatus=="created").ToList();
+            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectID");
+
+            Project pinfo = new Project();
+            Team tinfo = new Team();
+
+            var availteamlist = dbcontext.Teams.Where(team => team.IsAvailable == "Available").ToList();
+            ViewBag.teamlist = new SelectList(availteamlist, "TeamID", "TeamID");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AssignProject(Assignproject assignproject)
+        {
+            ViewBag.Show = true;
+
             var projlist = dbcontext.Projects.ToList();
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectID");
 
-            var availteamlist = dbcontext.Teams.ToList();
+            var availteamlist = dbcontext.Teams.Where(team=>team.IsAvailable=="Available").ToList();
             ViewBag.teamlist = new SelectList(availteamlist, "TeamID", "TeamID");
 
+            Project pinfo = new Project();
+            Team tinfo = new Team();
 
 
+
+            pinfo = dbcontext.Projects.Single(proj => proj.ProjectID == assignproject.ProjectID);
+            tinfo = dbcontext.Teams.Single(team => team.TeamID == assignproject.TeamID);
+
+            Employee einfo = dbcontext.Employees.Single(emp => emp.EmpID == tinfo.TeamLeadID);
+            ViewBag.u = pinfo.ProjectName;
+            ViewBag.m = tinfo.TeamLeadID;
+            ViewBag.tln = einfo.EmpName;
+
+            
+            pinfo.TeamID = assignproject.TeamID;
+            pinfo.ProjectStatus = "Assigned";
+
+            tinfo.IsAvailable = "Not Available";
+            dbcontext.SaveChanges();
+            ViewBag.succ = true;
+            ViewBag.Show = false;
 
 
 

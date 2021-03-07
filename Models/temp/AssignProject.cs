@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ReleaseManagementMVC.Models.temp
 {
-    public class AssignProject
+    public class Assignproject
     {
         public string ProjectID { get; set; }
         public string TeamID { get; set; }

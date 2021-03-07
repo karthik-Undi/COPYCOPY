@@ -12,6 +12,7 @@ namespace ReleaseManagementMVC.Models
         {
 
         }
+        public DbSet<EmployeeTeamAssignment> EmployeeTeamAssignmentList { get; set; }
         public DbSet<Login> Logins { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Team> Teams { get; set; }

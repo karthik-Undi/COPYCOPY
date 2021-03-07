@@ -1,0 +1,56 @@
+﻿@model ReleaseManagementMVC.Models.temp.Assignproject
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>AssignProject</title>
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <h3>Add Project</h3>
+                @Html.AntiForgeryToken()
+                @Html.DropDownListFor(model => model.ProjectID, ViewBag.projlist as SelectList, "Select Project ID", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
+                @Html.DropDownListFor(model => model.TeamID, ViewBag.teamlist as SelectList, "Select Team ID", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })<input type="submit" value="Create" class="btn btn-default" />
+
+                <div id="field" style="display:none;">
+                    <p>Project Name     : @ViewBag.u</p>
+                    <p>Team Leader Id   : @ViewBag.m</p>
+                    <p>Team Leader Name : @ViewBag.tln</p>
+
+                </div>
+
+                if (ViewBag.succ == true)
+                {
+                    <p>Project Assign Successful.</p>
+                    <p>@ViewBag.tln and team were assigned to @ViewBag.u</p>
+                }
+            }
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("yo", "MainRegistration", "Register")
+                    @Html.ActionLink("Add Projects", "MainRegistration", "Register", new { htmlAttributes = new { style = "color:white;font-size: 25px;font-weight: bold;" } })
+                    @Html.ActionLink("Approve Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("Assign Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
