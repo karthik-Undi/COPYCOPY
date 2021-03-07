@@ -1,28 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ReleaseManagementMVC.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ReleaseManagementMVC.Models.temp;
-using ReleaseManagementMVC.Models;
 
 namespace ReleaseManagementMVC.Controllers
 {
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Login()
+
+        public ActionResult MainLogin()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login(Login login)
-        {
 
+        [HttpPost]
+        public ActionResult MainLogin(Login login)
+        {
+            ViewBag.ws2 = "itworked";
             ReleaseManagementContext dbcontext = new ReleaseManagementContext();
-            Login temprecord = dbcontext.Logins.Single(log => (log.LoginID == login.LoginID) && (log.Password == login.Password));
-            ViewBag.succ = true;
-            ViewBag.Name = temprecord.LoginID;
+            try
+            {
+                Login temprecord = dbcontext.Logins.Single(log => (log.LoginID == login.LoginID) && (log.Password == login.Password));
+            }
+            catch (System.InvalidOperationException)
+            {
+                ViewBag.nouser = true;
+            }
             return View();
         }
     }

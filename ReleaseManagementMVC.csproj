@@ -128,12 +128,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bug.cs" />
     <Compile Include="Models\Developer.cs" />
+    <Compile Include="Models\dropbox\Roles.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Module.cs" />
@@ -178,10 +181,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Register\regemp.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Shared\_ManagerLogin.cshtml" />
+    <Content Include="Views\Shared\_MainLogin.cshtml" />
+    <Content Include="Views\Login\MainLogin.cshtml" />
+    <Content Include="Views\Shared\_MainRegistration.cshtml" />
+    <Content Include="Views\Register\MainRegistration.cshtml" />
+    <Content Include="Views\Manager\AddProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

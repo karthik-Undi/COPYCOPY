@@ -1,0 +1,16 @@
+﻿@model ReleaseManagementMVC.Models.Project
+
+@{
+    ViewBag.Title = "Add Project";
+    Layout = "~/Views/Shared/_ManagerLogin.cshtml";
+}
+
+    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new {placeholder="Project Name", @class = "form-control" } })
+    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new {type="date", placeholder = "Start Date", @class = "form-control" } })
+    @Html.EditorFor(model => model.ExpectedEndDate, new { htmlAttributes = new { type = "date", placeholder = "Expected End Date", @class = "form-control" } })
+    @Html.EditorFor(model => model.TeamID, new { htmlAttributes = new { placeholder = "Team ID", @class = "form-control" } })
+    @Html.EditorFor(model => model.ProjectStatus, new { htmlAttributes = new { placeholder = "Project Status", @class = "form-control" } })
+    <input type="submit" value="Create" class="btn btn-default" />
+
+
+

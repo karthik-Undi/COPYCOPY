@@ -1,0 +1,28 @@
+﻿@model ReleaseManagementMVC.Models.Login
+
+@{
+    ViewBag.Title = "MainLogin";
+    Layout = "~/Views/Shared/_MainLogin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorFor(model => model.LoginID, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+
+    <input type="submit" value="Login" class="btn btn-default" />
+}
+@if (ViewBag.nouser == true)
+{
+    <div>
+        <p style="color:red">Invalid User Credentials. Try again</p>
+    </div>
+}
+<div>
+    @Html.ActionLink("New User? Register here.", "MainRegistration", "Register", null, new
+        {
+    style = "color: green"
+        })<br />
+</div>

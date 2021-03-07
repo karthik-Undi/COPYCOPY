@@ -1,0 +1,32 @@
+﻿@model ReleaseManagementMVC.Models.temp.Registration
+@{
+    ViewBag.Title = "MainRegistration";
+    Layout = "~/Views/Shared/_MainRegistration.cshtml";
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.EmpID, new { placeholder = "Employee ID", @class = "form-control" })
+    @Html.TextBoxFor(m => m.EmpName, new { placeholder = "Employee Name", @class = "form-control" })
+    <p>Employee Role</p>
+    @Html.DropDownListFor(m => m.EmpRole, ViewBag.Emprole as IEnumerable<SelectListItem>, "select role", new { @class = "form-control" })<p></p>
+    @*@Html.TextBoxFor(m => m.EmpRole, new { placeholder = "Employee Role", @class = "form-control" })*@
+    <p>Password</p>
+    @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
+    <input type="submit" value="Create" class="btn btn-default" />
+    if (ViewBag.useralreadyexists == true)
+    {
+        <div>
+            <p style="color:red">Duplicate emlpoyee ID. Try again</p>
+        </div>
+    }
+    @Html.ActionLink("Log in .", "MainLogin", "Login", null, new
+    {
+    style = "color: green"
+    })
+    //@Html.DropDownListFor(m=>m.EmpRole,ViewBag.rolelist as SelectList)
+
+}
+
