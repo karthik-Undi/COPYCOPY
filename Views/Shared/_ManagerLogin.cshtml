@@ -161,6 +161,16 @@
         a:hover{
             color: black;
         }
+        .ddl {
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+        }
     </style>
 
 
@@ -169,15 +179,15 @@
     <div class="container" id="container">
         <div class="form-container log-in-container">
             <form action="#">
-                <h1>@ViewBag.Title</h1>
+                <h2>@ViewBag.Title</h2>
                 @RenderBody()
-
+                @RenderSection("scripts", required: false)
                 <!---------------------------------------------------------------------------------->
 
 
             </form>
         </div>
-        <div class="overlay-container">
+        @*<div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
                     @Html.ActionLink("Add Projects", "MainRegistration", "Register",new {style= "color:white;font-size: 25px;font-weight: bold;" })
@@ -186,7 +196,7 @@
                     @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </body>
 </html>

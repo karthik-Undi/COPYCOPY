@@ -1,0 +1,26 @@
+﻿@model ReleaseManagementMVC.Models.temp.RegProject
+
+@{
+    ViewBag.Title = "Add Project";
+    Layout = "~/Views/Shared/_ManagerLogin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorFor(model => model.ProjectID, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.EditorFor(model => model.ExpectedEndDate, new { htmlAttributes = new { @class = "form-control" } })
+
+    @Html.DropDownListFor(model => model.TeamID,ViewBag.teamlist as SelectList ,new {style= "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
+
+    @Html.EditorFor(model => model.ProjectStatus, new { htmlAttributes = new { @class = "form-control" } })
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+}
