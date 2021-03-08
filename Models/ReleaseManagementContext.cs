@@ -8,7 +8,7 @@ namespace ReleaseManagementMVC.Models
 {
     public class ReleaseManagementContext:DbContext
     {
-        public ReleaseManagementContext():base("RMSMVC-COPY")
+        public ReleaseManagementContext():base("RMSMVC-COPY2")
         {
 
         }

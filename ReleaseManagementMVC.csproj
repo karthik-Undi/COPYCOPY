@@ -204,10 +204,16 @@
     <Content Include="Views\Manager\WelcomeManager.cshtml" />
     <Content Include="Views\Manager\ApproveProjects1.cshtml" />
     <Content Include="Views\Manager\ApproveProjects.cshtml" />
-    <Content Include="Views\TeamLeader\WelcomeTeamLead.cshtml" />
+    <Content Include="Views\TeamLeader\WelcomeTeamLeader.cshtml" />
     <Content Include="Views\TeamLeader\ApproveModules.cshtml" />
     <Content Include="Views\Tester\WelcomeTester.cshtml" />
     <Content Include="Views\Tester\AddBug.cshtml" />
+    <Content Include="Views\Developer\Show.cshtml" />
+    <Content Include="Views\Tester\ViewBug.cshtml" />
+    <Content Include="Views\Tester\ViewDetails.cshtml" />
+    <Content Include="Views\Developer\ViewBugs.cshtml" />
+    <Content Include="Views\Tester\Infdex.cshtml" />
+    <Content Include="Views\Shared\_ViewLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

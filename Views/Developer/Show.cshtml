@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ReleaseManagementMVC.Models.Module>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TesterID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleStatus)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TesterID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleStatus)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    @Html.ActionLink("Home", "WelcomeDev", "Developer")
+    @Html.ActionLink("View Modules", "Show", "Developer")
+    @Html.ActionLink("Mark as done", "DevMarkDone", "Developer")
+    @Html.ActionLink("View Bugs", "ViewBug", "Developer")
+    @Html.ActionLink("Log out", "MainLogin", "Login")
+</body>
+</html>

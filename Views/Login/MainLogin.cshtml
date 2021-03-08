@@ -11,7 +11,6 @@
 
     @Html.EditorFor(model => model.LoginID, new { required = "required", htmlAttributes = new { @class = "form-control" } })
     @Html.EditorFor(model => model.Password, new { required = "required", htmlAttributes = new { @class = "form-control" } })
-
     <input type="submit" value="Login" class="btn btn-default" />
 }
 @if (ViewBag.nouser == true)

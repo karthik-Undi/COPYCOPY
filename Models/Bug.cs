@@ -21,7 +21,16 @@ namespace ReleaseManagementMVC.Models
         public Tester tester{ get; set; }
 
         public string BugStatus{ get; set; }
+        public Bug(string id,string mid,string tid,string bs)
+        {
+            this.BugID = id;
+            this.ModuleID = mid;
+            TesterID = tid;
+            BugStatus = bs;
+        }
+        public Bug()
+        {
 
-
+        }
     }
 }

@@ -36,7 +36,15 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                   
+                    @Html.ActionLink("Home", "WelcomeDev", "Developer")
+                    @Html.ActionLink("View Modules", "Show", "Developer")
+                    @Html.ActionLink("Mark as done", "DevMarkDone", "Developer")
+                    @Html.ActionLink("View Bugs", "ViewBug", "Developer")
+                    @Html.ActionLink("Log out", "MainLogin", "Login")
+
+
+
+
                 </div>
             </div>
         </div>

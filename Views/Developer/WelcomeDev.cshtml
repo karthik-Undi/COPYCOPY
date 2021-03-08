@@ -29,11 +29,11 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    @Html.ActionLink("yo", "MainRegistration", "Register")
-                    @Html.ActionLink("Add Projects", "MainRegistration", "Register", new { htmlAttributes = new { style = "color:white;font-size: 25px;font-weight: bold;" } })
-                    @Html.ActionLink("Approve Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("Assign Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("Home", "WelcomeDev", "Developer")
+                    @Html.ActionLink("View Modules", "Show", "Developer")
+                    @Html.ActionLink("Mark as done", "DevMarkDone", "Developer")
+                    @Html.ActionLink("View Bugs", "ViewBug", "Developer")
+                    @Html.ActionLink("Log out", "MainLogin", "Login")
                 </div>
             </div>
         </div>

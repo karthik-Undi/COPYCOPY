@@ -17,6 +17,10 @@ namespace ReleaseManagementMVC.Controllers
         {
             return View();
         }
+        public ActionResult Infdex()
+        {
+            return View();
+        }
 
         public ActionResult WelcomeTester()
         {
@@ -58,8 +62,39 @@ namespace ReleaseManagementMVC.Controllers
             string Tid = "TE01";//TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == Tid).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
+            int count=dbcontext.Bugs.Count(x=>x.BugID==bug.BugID);
+            if(count==0)
+            {               
+                dbcontext.Bugs.Add(new Bug(bug.BugID,bug.ModuleID,Tid,bug.BugStatus));
+                dbcontext.SaveChanges();
+                
+            }
+            else
+            {
+                Bug tempbug;
+                tempbug = dbcontext.Bugs.Single(x => x.BugID == bug.BugID);
+                tempbug.BugStatus = bug.BugStatus;
+                dbcontext.SaveChanges();
+            }
+
 
             return View();
+        }
+
+        public ActionResult ViewBug()
+        {
+            string EmpID = "TE01";
+            var viewbug = dbcontext.Bugs.Where(x => x.TesterID == EmpID);
+            return View(viewbug);
+        }
+
+        public ActionResult ViewDetails()
+
+        {
+            string EmpID = "TE01";//TempData.Peek("EmployeeKey").ToString();
+
+            var modul = dbcontext.Modules.Where(mod => mod.TesterID == EmpID);
+            return View(modul);
         }
 
     }

@@ -37,11 +37,14 @@ namespace ReleaseManagementMVC.Controllers
 
             if (Emp.EmpRole == "Manager")
                 return RedirectToAction("WelcomeManager", "Manager");
-            if (Emp.EmpRole == "Team Leader")
-                return RedirectToAction("AssignModules1", "TeamLeader");
+            if (Emp.EmpRole == "TeamLeader")
+                return RedirectToAction("WelcomeTeamLeader", "TeamLeader");
             if (Emp.EmpRole == "Developer")
                 return RedirectToAction("WelcomeDev", "Developer");
-            
+            if(Emp.EmpRole=="Tester")
+                return RedirectToAction("WelcomeTester", "Tester");
+
+
 
 
 

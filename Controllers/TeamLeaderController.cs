@@ -22,11 +22,11 @@ namespace ReleaseManagementMVC.Controllers
             return View();
         }
 
-        public ActionResult WelcomeTeamLead()
+        public ActionResult WelcomeTeamLeader()
         {
-            string id = "TL01"; //TempData.Peek("EmployeeKey").ToString();
+            string id = TempData.Peek("EmployeeKey").ToString();
             Employee emp = dbcontext.Employees.Single(x => x.EmpID == id);
-            ViewBag.name = "karthik";// emp.EmpName;
+            ViewBag.name = emp.EmpName;
             ViewBag.id = id;
 
 
@@ -35,7 +35,7 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AssignModules1()
         {
-            string Eid = "D001";// TempData.Peek("Employeekey").ToString();
+            string Eid = TempData.Peek("Employeekey").ToString();
             EmployeeTeamAssignment user = dbcontext.EmployeeTeamAssignmentList.Single(emp => emp.EmpID == Eid);
 
             var projlist = dbcontext.Projects.Where(proj => proj.TeamID == user.TeamID && proj.ProjectStatus=="Assigned");
@@ -52,20 +52,20 @@ namespace ReleaseManagementMVC.Controllers
                         from et in empteams.DefaultIfEmpty()
                         select new
                         {
-                            emp.EmpID, et.TeamID, emp.EmpRole
+                            emp.EmpID, et.TeamID, emp.EmpRole,emp.EmpName
                         };
 
 
 
             var devlist = ajoin.Where(dev => dev.TeamID == user.TeamID && dev.EmpRole == "Developer");
-            ViewBag.devlist = new SelectList(devlist, "EmpID", "EmpID");
+            ViewBag.devlist = new SelectList(devlist, "EmpID", "EmpName");
 
             return View();
         }
         [HttpPost]
         public ActionResult AssignModules1(Module module)
         {
-            string Eid = "D001";// TempData.Peek("Employeekey").ToString();
+            string Eid = TempData.Peek("Employeekey").ToString();
             EmployeeTeamAssignment user = dbcontext.EmployeeTeamAssignmentList.Single(emp => emp.EmpID == Eid);
 
             var projlist = dbcontext.Projects.Where(proj => proj.TeamID == user.TeamID && proj.ProjectStatus == "Assigned");
@@ -82,19 +82,20 @@ namespace ReleaseManagementMVC.Controllers
                         {
                             emp.EmpID,
                             et.TeamID,
-                            emp.EmpRole
+                            emp.EmpRole,
+                            emp.EmpName
                         };
 
 
 
             var devlist = ajoin.Where(dev => dev.TeamID == user.TeamID && dev.EmpRole == "Developer");
-            ViewBag.devlist = new SelectList(devlist, "EmpID", "EmpID");
+            ViewBag.devlist = new SelectList(devlist, "EmpID", "EmpName");
 
             var dname = dbcontext.Developers.Single(emp => emp.DeveloperID == module.DeveloperID);
 
             try
             {
-                dbcontext.Modules.Add(new Module(module.ModuleID, module.ModuleName, module.ProjectID, module.DeveloperID, module.TesterID, "created"));
+                dbcontext.Modules.Add(new Module(module.ModuleID, module.ModuleName, module.ProjectID, module.DeveloperID, module.TesterID, "Assigned"));
                 dbcontext.SaveChanges();            
                 ViewBag.succ = true;            
                 ViewBag.msg = "module " + module.ModuleName + "mname was assigned to " +dname.DeveloperName;

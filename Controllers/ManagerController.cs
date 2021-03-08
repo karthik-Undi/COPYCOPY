@@ -22,10 +22,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult WelcomeManager()
         {
-            string ManID = "M001";//TempData.Peek("EmployeeKey").ToString();
+            string ManID = TempData.Peek("EmployeeKey").ToString();
             Employee tempemp = dbcontext.Employees.Single(x => x.EmpID == ManID);
-            ViewBag.id = "oop";//ManID;
-            ViewBag.name = "karthik";//tempemp.EmpName;
+            ViewBag.id =ManID;
+            ViewBag.name = tempemp.EmpName;
             return View();
         }
 
