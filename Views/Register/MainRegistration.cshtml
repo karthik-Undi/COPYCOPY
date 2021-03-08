@@ -8,13 +8,13 @@
 
 @using (Html.BeginForm())
 {
-    @Html.TextBoxFor(m => m.EmpID, new { placeholder = "Employee ID", @class = "form-control" })
-    @Html.TextBoxFor(m => m.EmpName, new { placeholder = "Employee Name", @class = "form-control" })
+    @Html.TextBoxFor(m => m.EmpID, new {required="required", placeholder = "Employee ID", @class = "form-control" })
+    @Html.TextBoxFor(m => m.EmpName, new { required = "required", placeholder = "Employee Name", @class = "form-control" })
     <p>Employee Role</p>
-    @Html.DropDownListFor(m => m.EmpRole, ViewBag.Emprole as IEnumerable<SelectListItem>, "select role", new { @class = "form-control" })<p></p>
+    @Html.DropDownListFor(m => m.EmpRole, ViewBag.Emprole as IEnumerable<SelectListItem>, "select role", new { required = "required", @class = "form-control" })<p></p>
     @*@Html.TextBoxFor(m => m.EmpRole, new { placeholder = "Employee Role", @class = "form-control" })*@
     <p>Password</p>
-    @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
+    @Html.PasswordFor(model => model.Password, new { required = "required", htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
     <input type="submit" value="Create" class="btn btn-default" />
     if (ViewBag.useralreadyexists == true)
     {

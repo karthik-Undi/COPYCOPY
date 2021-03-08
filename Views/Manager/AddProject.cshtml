@@ -28,21 +28,29 @@
                 <span>start date</span>
                 @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { type = "date", @class = "form-control" } })
                 <span>Expected end date</span>
-                @Html.EditorFor(model => model.ExpectedEndDate, new { htmlAttributes = new { type = "date", @class = "form-control" } })
-                @*@Html.EditorFor(model => model.ActualEndDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                @*@Html.DropDownListFor(model => model.TeamID,ViewBag.teamlist as SelectList, new { style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })*@
-                @*@Html.EditorFor(model => model.ProjectStatus, new { htmlAttributes = new { @class = "form-control" } })*@
-                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.EditorFor(model => model.ExpectedEndDate, new { htmlAttributes = new { type = "date", @class = "form-control" } })@*@Html.EditorFor(model => model.ActualEndDate, new { htmlAttributes = new { @class = "form-control" } })*@@*@Html.DropDownListFor(model => model.TeamID,ViewBag.teamlist as SelectList, new { style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })*@@*@Html.EditorFor(model => model.ProjectStatus, new { htmlAttributes = new { @class = "form-control" } })*@<input type="submit" value="Create" class="btn btn-default" />
+
+                if (ViewBag.succ == true)
+                {
+                    <div>
+                        <p>Project Added Successfully</p>
+                    </div>
+                }
+
             }
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    @Html.ActionLink("yo", "MainRegistration","Register")
-                    @Html.ActionLink("Add Projects", "MainRegistration", "Register", new {htmlAttributes=new { style = "color:white;font-size: 25px;font-weight: bold;" } })
-                    @Html.ActionLink("Approve Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("Assign Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("Add Project", "AddProject", "Manager")
+                    @Html.ActionLink("Assign Team to Projects", "AssignProject", "Manager")
+                    @Html.ActionLink("Approve Projects", "ApproveProjects", "Manager")
+                    @Html.ActionLink("Log out", "MainLogin", "Login")
+
+
+
+
+
                 </div>
             </div>
         </div>

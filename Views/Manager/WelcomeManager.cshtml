@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            <form>
+                <h1>Welcome @ViewBag.name</h1>
+                <h2>Id : @ViewBag.id</h2>
+                <h2>Role: Manager</h2>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("Add Project", "AddProject", "Manager")
+                    @Html.ActionLink("Assign Team to Projects", "AssignProject", "Manager")
+                    @Html.ActionLink("Approve Projects", "ApproveProjects", "Manager")
+                    @Html.ActionLink("Logout", "MainLogin", "Login")
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

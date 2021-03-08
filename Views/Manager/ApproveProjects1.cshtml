@@ -1,0 +1,47 @@
+﻿@model ReleaseManagementMVC.Models.Project
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome</title>
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            <form>
+                @Html.DropDownListFor(model => model.ProjectID, ViewBag.projlist as SelectList, "Select Project", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
+                <input type="submit" value="Create" class="btn btn-default" />
+
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("Add Project", "AddProject", "Manager")
+                    @Html.ActionLink("Assign Team to Projects", "AssignProject", "Manager")
+                    @Html.ActionLink("Approve Projects", "ApproveProjects", "Manager")
+                    @Html.ActionLink("Log out", "MainLogin", "Login")
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

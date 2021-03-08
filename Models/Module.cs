@@ -28,6 +28,21 @@ namespace ReleaseManagementMVC.Models
 
         [ForeignKey("TesterID")]
         public Tester tester { get; set; }
+        public Module(string a,string b,string c,string d,string e,string f)
+        {
+            ModuleID = a;
+            ModuleName = b;
+            ProjectID = c;
+            DeveloperID = d;
+            TesterID = e;
+            ModuleStatus = f;
+
+
+        }
+        public Module()
+        {
+
+        }
 
 
     }

@@ -20,11 +20,12 @@ namespace ReleaseManagementMVC.Controllers
             return View();
         }
 
-        public ActionResult Assign(string Assignproj,string tid)
-
+        public ActionResult WelcomeManager()
         {
-
-            //dbcontext.Projects.
+            string ManID = "M001";//TempData.Peek("EmployeeKey").ToString();
+            Employee tempemp = dbcontext.Employees.Single(x => x.EmpID == ManID);
+            ViewBag.id = "oop";//ManID;
+            ViewBag.name = "karthik";//tempemp.EmpName;
             return View();
         }
 
@@ -46,11 +47,12 @@ namespace ReleaseManagementMVC.Controllers
                 regProject.ExpectedEndDate,
                 regProject.ExpectedEndDate,
                 regProject.TeamID,
-                "Just Created"
+                "Created"
                 );
             
             dbcontext.Projects.Add(ptemp);
             dbcontext.SaveChanges();
+            ViewBag.succ = true;
             return View();
         }
 
@@ -60,8 +62,6 @@ namespace ReleaseManagementMVC.Controllers
             var projlist = dbcontext.Projects.Where(proj=>proj.ProjectStatus=="created").ToList();
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectID");
 
-            Project pinfo = new Project();
-            Team tinfo = new Team();
 
             var availteamlist = dbcontext.Teams.Where(team => team.IsAvailable == "Available").ToList();
             ViewBag.teamlist = new SelectList(availteamlist, "TeamID", "TeamID");
@@ -104,6 +104,35 @@ namespace ReleaseManagementMVC.Controllers
 
             return View();
         }
+
+        public ActionResult ApproveProjects()
+        {
+            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for approval");
+            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ApproveProjects(Project project)
+        {
+            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for approval");
+            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
+
+            Project proj = dbcontext.Projects.Single(x => x.ProjectID == project.ProjectID);
+            proj.ProjectStatus = "Approved";
+            dbcontext.SaveChanges();
+            ViewBag.succ = "Project: " + proj.ProjectName + " Approoved";
+
+            return View();
+
+        }
+
+
+
+
+
 
 
 

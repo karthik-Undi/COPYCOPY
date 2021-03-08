@@ -7,26 +7,50 @@ namespace ReleaseManagementMVC.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-
+        Login temprecord;
         public ActionResult MainLogin()
         {
+
             return View();
         }
 
         [HttpPost]
         public ActionResult MainLogin(Login login)
         {
-            ViewBag.ws2 = "itworked";
+
+
             ReleaseManagementContext dbcontext = new ReleaseManagementContext();
+            
             try
             {
-                Login temprecord = dbcontext.Logins.Single(log => (log.LoginID == login.LoginID) && (log.Password == login.Password));
+                temprecord = dbcontext.Logins.Single(log => (log.LoginID == login.LoginID) && (log.Password == login.Password));
+                
             }
             catch (System.InvalidOperationException)
             {
                 ViewBag.nouser = true;
             }
+
+            Employee Emp = dbcontext.Employees.Single(emp => emp.EmpID == temprecord.LoginID);
+            TempData["EmployeeKey"] = login.LoginID;
+            TempData["EmployeeKeyName"] = Emp.EmpName;
+
+            if (Emp.EmpRole == "Manager")
+                return RedirectToAction("WelcomeManager", "Manager");
+            if (Emp.EmpRole == "Team Leader")
+                return RedirectToAction("AssignModules1", "TeamLeader");
+            if (Emp.EmpRole == "Developer")
+                return RedirectToAction("WelcomeDev", "Developer");
+            
+
+
+
+
+
+
             return View();
+
+
         }
     }
 }

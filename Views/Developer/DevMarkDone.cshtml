@@ -1,0 +1,48 @@
+﻿@model ReleaseManagementMVC.Models.Module
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            @Html.BeginForm(){
+            @Html.AntiForgeryToken()
+            @Html.DropDownListFor(model => model.ModuleID, ViewBag.modlist as SelectList, "Select Module ID", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
+            <input type="submit" value="Mark Completed" class="btn btn-default" />
+            }
+
+
+
+
+
+
+
+
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+

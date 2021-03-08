@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>AssignProject</title>
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            @using (Html.BeginForm())
+            {
+
+                <h1>Welcome @ViewBag.name</h1>
+                <h2>Role : Developer</h2>
+                <h3>Modules Assigned: @ViewBag.mc</h3>
+
+
+
+            }
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("yo", "MainRegistration", "Register")
+                    @Html.ActionLink("Add Projects", "MainRegistration", "Register", new { htmlAttributes = new { style = "color:white;font-size: 25px;font-weight: bold;" } })
+                    @Html.ActionLink("Approve Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("Assign Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
