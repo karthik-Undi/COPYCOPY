@@ -30,8 +30,14 @@
             {
                 @Html.AntiForgeryToken()
                 <h3>Approve Projects</h3>
-                @Html.EditorFor(model => model.ProjectID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ProjectID,ViewBag.projlist as SelectList,"Select Project", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
                 <input type="submit" value="Approve" class="btn btn-default" />
+                if (ViewBag.succ == true)
+                {
+                    <div>
+                        <p>@ViewBag.msg</p>
+                    </div>
+                }
             }
 
 

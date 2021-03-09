@@ -16,7 +16,7 @@ namespace ReleaseManagementMVC.Controllers
         {
             return View();
         }
-
+        []
         public ActionResult WelcomeDev()
         {
             string devid = TempData.Peek("EmployeeKey").ToString();
@@ -67,7 +67,6 @@ namespace ReleaseManagementMVC.Controllers
 
         {
             string EmpID = TempData.Peek("EmployeeKey").ToString();
-            Module tempmod = dbcontext.Modules.Single(x => x.DeveloperID == EmpID);
 
             var joinedmodbug = from mod in dbcontext.Modules
                                join bug in dbcontext.Bugs

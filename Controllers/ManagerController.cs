@@ -60,7 +60,7 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult AssignProject()
         {
             var projlist = dbcontext.Projects.Where(proj=>proj.ProjectStatus=="created").ToList();
-            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectID");
+            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
 
             var availteamlist = dbcontext.Teams.Where(team => team.IsAvailable == "Available").ToList();
@@ -72,8 +72,8 @@ namespace ReleaseManagementMVC.Controllers
         {
             ViewBag.Show = true;
 
-            var projlist = dbcontext.Projects.ToList();
-            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectID");
+            var projlist = dbcontext.Projects.Where(proj => proj.ProjectStatus == "created").ToList();
+            ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
             var availteamlist = dbcontext.Teams.Where(team=>team.IsAvailable=="Available").ToList();
             ViewBag.teamlist = new SelectList(availteamlist, "TeamID", "TeamID");
@@ -107,7 +107,7 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult ApproveProjects()
         {
-            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for approval");
+            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for Manager approval");
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
 
@@ -117,13 +117,14 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult ApproveProjects(Project project)
         {
-            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for approval");
+            var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for Manager approval");
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
             Project proj = dbcontext.Projects.Single(x => x.ProjectID == project.ProjectID);
             proj.ProjectStatus = "Approved";
             dbcontext.SaveChanges();
-            ViewBag.succ = "Project: " + proj.ProjectName + " Approoved";
+            ViewBag.succ = true;
+            ViewBag.msg = "Project: " + proj.ProjectName + " Approoved";
 
             return View();
 
