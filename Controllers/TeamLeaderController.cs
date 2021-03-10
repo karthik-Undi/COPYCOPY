@@ -24,6 +24,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult WelcomeTeamLeader()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string id = TempData.Peek("EmployeeKey").ToString();
             Employee emp = dbcontext.Employees.Single(x => x.EmpID == id);
             ViewBag.name = emp.EmpName;
@@ -35,6 +39,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AssignModules1()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var testerlist = dbcontext.Testers.ToList();
             ViewBag.testerlist = new SelectList(testerlist, "TesterID", "TesterName");
             string Eid = TempData.Peek("Employeekey").ToString();
@@ -67,6 +75,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult AssignModules1(Module module)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var testerlist = dbcontext.Testers.ToList();
             ViewBag.testerlist = new SelectList(testerlist, "TesterID", "TesterName");
 
@@ -119,6 +131,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult ApproveModules()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var modlist = dbcontext.Modules.Where(x => x.ModuleStatus == "Waiting for TL approval");
             ViewBag.modlist = new SelectList(modlist, "ModuleID", "ModuleName");
 
@@ -139,6 +155,10 @@ namespace ReleaseManagementMVC.Controllers
         }
         public ActionResult ViewModules()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string Eid = TempData.Peek("Employeekey").ToString();
             EmployeeTeamAssignment t = dbcontext.EmployeeTeamAssignmentList.Single(c => c.EmpID == Eid);
             var joinedmodpro = from mod in dbcontext.Modules

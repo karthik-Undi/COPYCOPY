@@ -20,40 +20,39 @@ namespace ReleaseManagementMVC.Controllers
 
 
             ReleaseManagementContext dbcontext = new ReleaseManagementContext();
-            
+
             try
             {
                 temprecord = dbcontext.Logins.Single(log => (log.LoginID == login.LoginID) && (log.Password == login.Password));
-                
+                Employee Emp = dbcontext.Employees.Single(emp => emp.EmpID == temprecord.LoginID);
+                TempData["EmployeeKey"] = login.LoginID;
+                TempData["EmployeeKeyName"] = Emp.EmpName;
+
+                if (Emp.EmpRole == "Manager")
+                    return RedirectToAction("WelcomeManager", "Manager");
+                if (Emp.EmpRole == "TeamLeader")
+                    return RedirectToAction("WelcomeTeamLeader", "TeamLeader");
+                if (Emp.EmpRole == "Developer")
+                    return RedirectToAction("WelcomeDev", "Developer");
+                if (Emp.EmpRole == "Tester")
+                    return RedirectToAction("WelcomeTester", "Tester");
+
             }
             catch (System.InvalidOperationException)
             {
                 ViewBag.nouser = true;
             }
 
-            Employee Emp = dbcontext.Employees.Single(emp => emp.EmpID == temprecord.LoginID);
-            TempData["EmployeeKey"] = login.LoginID;
-            TempData["EmployeeKeyName"] = Emp.EmpName;
-
-            if (Emp.EmpRole == "Manager")
-                return RedirectToAction("WelcomeManager", "Manager");
-            if (Emp.EmpRole == "TeamLeader")
-                return RedirectToAction("WelcomeTeamLeader", "TeamLeader");
-            if (Emp.EmpRole == "Developer")
-                return RedirectToAction("WelcomeDev", "Developer");
-            if(Emp.EmpRole=="Tester")
-                return RedirectToAction("WelcomeTester", "Tester");
-
-
-
-
-
-
-
-
             return View();
-
-
         }
+        public ActionResult Logout()
+        {
+            TempData.Clear();
+
+            return RedirectToAction("MainLogin", "Login");
+        }
+
+
     }
+
 }

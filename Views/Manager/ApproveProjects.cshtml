@@ -45,11 +45,12 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("Home", "WelcomeManager", "Manager")
 
                     @Html.ActionLink("Add Project", "AddProject", "Manager")
                     @Html.ActionLink("Assign Team to Projects", "AssignProject", "Manager")
                     @Html.ActionLink("Approve Projects", "ApproveProjects", "Manager")
-                    @Html.ActionLink("Log out", "MainLogin", "Login")
+                    @Html.ActionLink("Log out", "Logout", "Login")
 
 
                 </div>

@@ -22,6 +22,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult WelcomeManager()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string ManID = TempData.Peek("EmployeeKey").ToString();
             Employee tempemp = dbcontext.Employees.Single(x => x.EmpID == ManID);
             ViewBag.id =ManID;
@@ -31,6 +35,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AddProject()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var l = dbcontext.Teams.ToList();
             ViewBag.teamlist = new SelectList(l, "TeamID", "TeamID");
             return View();
@@ -38,6 +46,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult AddProject(RegProject regProject)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
 
 
             Project ptemp = new Project(
@@ -59,6 +71,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AssignProject()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var projlist = dbcontext.Projects.Where(proj=>proj.ProjectStatus=="created").ToList();
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
@@ -70,6 +86,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult AssignProject(Assignproject assignproject)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             ViewBag.Show = true;
 
             var projlist = dbcontext.Projects.Where(proj => proj.ProjectStatus == "created").ToList();
@@ -107,6 +127,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult ApproveProjects()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for Manager approval");
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 
@@ -117,6 +141,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult ApproveProjects(Project project)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             var projlist = dbcontext.Projects.Where(x => x.ProjectStatus == "Waiting for Manager approval");
             ViewBag.projlist = new SelectList(projlist, "ProjectID", "ProjectName");
 

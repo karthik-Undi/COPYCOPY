@@ -69,8 +69,12 @@
         </tr>
     }
 
-</table><br/><br />
+</table>
+<br />
+<br />
+@Html.ActionLink("Home", "WelcomeTeamLeader", "TeamLeader")
+
 @Html.ActionLink("Add Modules", "AssignModules1", "TeamLeader")
 @Html.ActionLink("Approve Modules", "ApproveModules", "TeamLeader")
 @Html.ActionLink("View Modules", "ViewModules", "TeamLeader")
-@Html.ActionLink("Logout", "MainLogin", "Login")
+@Html.ActionLink("Logout", "Logout", "Login")

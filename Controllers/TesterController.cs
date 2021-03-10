@@ -22,6 +22,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult WelcomeTester()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string TesterID = TempData.Peek("EmployeeKey").ToString();
             Tester temp = dbcontext.Testers.Single(x => x.TesterID == TesterID);
             ViewBag.name = TempData.Peek("EmployeeKeyName").ToString();
@@ -34,20 +38,28 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult WelcomeTester(Module module)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string TesterID = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == TesterID).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
             ViewBag.name = TempData.Peek("EmployeeKeyName").ToString();
 
-            Module Tempmod;
-            Tempmod = dbcontext.Modules.Single(x => x.ModuleID == module.ModuleID);
-            Tempmod.ModuleStatus = "Passed";
-            dbcontext.SaveChanges();
+            //Module Tempmod;
+            //Tempmod = dbcontext.Modules.Single(x => x.ModuleID == module.ModuleID);
+            //Tempmod.ModuleStatus = "Passed";
+            //dbcontext.SaveChanges();
             return View();
         }
 
         public ActionResult AddBug()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string Tid = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == Tid).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
@@ -58,6 +70,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult AddBug(Bug bug)
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             ViewBag.succ = "";ViewBag.fail = "";
             string Tid = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == Tid).ToList();
@@ -89,6 +105,10 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult ViewBug()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID = TempData.Peek("EmployeeKey").ToString();
             var viewbug = dbcontext.Bugs.Where(x => x.TesterID == EmpID);
             if (viewbug.Count() == 0)
@@ -99,6 +119,10 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult ViewDetails()
 
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID = TempData.Peek("EmployeeKey").ToString();
 
             var modul = dbcontext.Modules.Where(mod => mod.TesterID == EmpID);

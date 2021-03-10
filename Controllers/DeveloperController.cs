@@ -20,6 +20,10 @@ namespace ReleaseManagementMVC.Controllers
         }
         public ActionResult WelcomeDev()
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string devid = TempData.Peek("EmployeeKey").ToString();
             int pcount = dbcontext.Modules.Count(mod => mod.DeveloperID == devid && mod.ModuleStatus == "Assigned");
             ViewBag.name = TempData.Peek("EmployeeKeyName").ToString();
@@ -30,6 +34,10 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult DevMarkDone()
 
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID =TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x=>x.DeveloperID==EmpID).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
@@ -43,6 +51,10 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult DevMarkDone(Module module)
 
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.DeveloperID == EmpID).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
@@ -58,6 +70,10 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult Show()
 
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID = TempData.Peek("EmployeeKey").ToString();
 
             var modul = dbcontext.Modules.Where(mod=>mod.DeveloperID==EmpID);
@@ -67,6 +83,10 @@ namespace ReleaseManagementMVC.Controllers
         public ActionResult ViewBugs()
 
         {
+            if (TempData.Peek("EmployeeKey") == null)
+            {
+                return RedirectToAction("Logout", "Login");
+            }
             string EmpID = TempData.Peek("EmployeeKey").ToString();
 
             var joinedmodbug = from mod in dbcontext.Modules
