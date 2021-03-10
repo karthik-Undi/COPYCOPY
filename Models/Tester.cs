@@ -16,5 +16,16 @@ namespace ReleaseManagementMVC.Models
         public string TesterName { get; set; }
 
         public string TesterStatus { get; set; }
+        public Tester(string id,string name,string status)
+        {
+            TesterID = id;
+            TesterName = name;
+            TesterStatus = status;
+
+        }
+        public Tester()
+        {
+
+        }
     }
 }

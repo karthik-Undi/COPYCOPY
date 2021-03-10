@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.TextBoxFor(m => m.EmpID, new {required="required", placeholder = "Employee ID", @class = "form-control" })
+    @Html.TextBoxFor(m => m.EmpID, new { required = "required", placeholder = "Employee ID", @class = "form-control" })
     @Html.TextBoxFor(m => m.EmpName, new { required = "required", placeholder = "Employee Name", @class = "form-control" })
     <p>Employee Role</p>
     @Html.DropDownListFor(m => m.EmpRole, ViewBag.Emprole as IEnumerable<SelectListItem>, "select role", new { required = "required", @class = "form-control" })<p></p>
@@ -16,10 +16,16 @@
     <p>Password</p>
     @Html.PasswordFor(model => model.Password, new { required = "required", htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
     <input type="submit" value="Create" class="btn btn-default" />
-    if (ViewBag.useralreadyexists == true)
+    if (ViewBag.useralreadyexists ==true)
     {
         <div>
             <p style="color:red">Duplicate emlpoyee ID. Try again</p>
+        </div>
+    }
+    if (ViewBag.succ == true)
+    {
+        <div>
+            <p style="color:green"> emlpoyee successfully registered.</p>
         </div>
     }
     @Html.ActionLink("Log in .", "MainLogin", "Login", null, new

@@ -1,48 +1,49 @@
 ﻿@model IEnumerable<ReleaseManagementMVC.Models.Bug>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_ViewLayout.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ViewBug</title>
-</head>
-<body>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BugID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModuleID)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.BugStatus)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-
+<h2>Bugs Raised</h2>
+<h3>Tester ID : @TempData.Peek("EmployeeKey")</h3>
+<h3>Tester Name: @TempData.Peek("EmployeeKeyName")</h3>
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BugID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModuleID)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.BugStatus)
-        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.BugID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModuleID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.BugStatus)
+        </th>
+        <th></th>
     </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BugID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModuleID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BugStatus)
+            </td>
+        </tr>
     }
-    
-    </table>
-</body>
-</html>
+
+</table>
+<br />
+<br />
+<br />
+@Html.ActionLink("Home", "WelcomeTester", "Tester")
+@Html.ActionLink("Raise a Bug", "AddBug", "Tester")
+@Html.ActionLink("Resolve a Bug", "AddBug", "Tester")
+@Html.ActionLink("View Bugs", "ViewBug", "Tester")
+@Html.ActionLink("Log out", "MainLogin", "Login")

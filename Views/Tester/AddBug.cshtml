@@ -20,19 +20,32 @@
                 @Html.AntiForgeryToken()
                 <h3>Raise a bug</h3>
 
-                @Html.EditorFor(model => model.BugID, new { htmlAttributes = new { placeholder="BudID",@class = "form-control" } })
+                @Html.EditorFor(model => model.BugID, new { htmlAttributes = new { placeholder = "BudID", @class = "form-control" } })
 
                 @Html.DropDownList("ModuleID", ViewBag.modlist as SelectList, new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
 
-               
 
-                @Html.DropDownList("BugStatus", new List<SelectListItem>
+
+                @*@Html.DropDownList("BugStatus", new List<SelectListItem>
                         {
                             new SelectListItem{ Text="Bug Raised", Value = "Bug Raised" },
                             new SelectListItem{ Text="Bug Closed", Value = "Bug Closed" }
 
-                        }, "Select Bug Status", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        }, "Select Bug Status", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })*@
+
+                <textarea style="width:71%" placeholder="Bug Description"></textarea>
+                <input type="submit" value="Create" class="btn btn-default" />
+                if (ViewBag.succ != "")
+                {
+                    <div>
+                        <p>@ViewBag.succ</p>
+                        <p>@ViewBag.succ2</p>
+                    </div>
+                }
+                if (ViewBag.fail != "")
+                {
+                    <p>duplicate Bug Id .Try again</p>
+                }
 
             }
 
@@ -43,7 +56,7 @@
                     @Html.ActionLink("Home", "WelcomeTester", "Tester")
                     @Html.ActionLink("Raise a Bug", "AddBug", "Tester")
                     @Html.ActionLink("Resolve a Bug", "AddBug", "Tester")
-                    @Html.ActionLink("View Bugs", "ViewBug", "Developer")
+                    @Html.ActionLink("View Bugs", "ViewBug", "Tester")
                     @Html.ActionLink("Log out", "MainLogin", "Login")
 
                 </div>

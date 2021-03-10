@@ -28,13 +28,7 @@
                 @Html.DropDownListFor(model => model.ProjectID, ViewBag.projlist as SelectList, "Select Project ID", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
                 @Html.DropDownListFor(model => model.DeveloperID, ViewBag.devlist as SelectList, "Select dev ID", new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
 
-                @Html.DropDownListFor(model=>model.TesterID, new List<SelectListItem>
-                            {
-                               new SelectListItem{ Text="TE01-Roy", Value = "TE01" },
-                               new SelectListItem{ Text="TE02-Kim", Value = "TE02" },
-                               new SelectListItem{ Text="TE03-Jen", Value = "TE03" }
-
-                            },"Select Tester",new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
+                @Html.DropDownListFor(model=>model.TesterID,ViewBag.testerlist as SelectList,"Select Tester",new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
             <input type="submit" value="Create" class="btn btn-default" />
                 if (ViewBag.succ == true)
                 {
@@ -50,11 +44,10 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    @Html.ActionLink("yo", "MainRegistration", "Register")
-                    @Html.ActionLink("Add Projects", "MainRegistration", "Register", new { htmlAttributes = new { style = "color:white;font-size: 25px;font-weight: bold;" } })
-                    @Html.ActionLink("Approve Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("Assign Projects", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
-                    @Html.ActionLink("View Status", "MainRegistration", "Register", new { style = "color:white;font-size: 25px;font-weight: bold;" })
+                    @Html.ActionLink("Add Modules", "AssignModules1", "TeamLeader")
+                    @Html.ActionLink("Approve Modules", "ApproveModules", "TeamLeader")
+                    @Html.ActionLink("View Modules", "ViewModules", "TeamLeader")
+                    @Html.ActionLink("Logout", "MainLogin", "Login")
                 </div>
             </div>
         </div>

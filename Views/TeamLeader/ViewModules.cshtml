@@ -1,38 +1,39 @@
-﻿@model IEnumerable<ReleaseManagementMVC.Models.temp.modbug>
+﻿@model IEnumerable<ReleaseManagementMVC.Models.temp.modpro>
 
 @{
-    ViewBag.Title = "ViewBugs";
+    ViewBag.Title = "ViewModules";
     Layout = "~/Views/Shared/_ViewLayout.cshtml";
 }
-
-<h2>ViewBugs</h2>
-@if (Model.Count() != 0)
-{
+<h2>Modules Assigned by  @TempData.Peek("EmployeeKeyName") to his team</h2>
 <table class="table">
     <tr>
         <th>
-            Bug ID
-        </th>
-        <th>
             Module ID
         </th>
+
         <th>
             Module Name
         </th>
         <th>
-            Developer ID
-        </th>
-        <th>
             Project ID
+        </th>
+
+        <th>
+            Project Name
+        </th>
+
+        <th>
+            Developer Name
         </th>
         <th>
             Tester ID
         </th>
+
         <th>
             Module Status
         </th>
         <th>
-            Bug Status
+            Project Status
         </th>
     </tr>
 
@@ -40,17 +41,19 @@
     {
         <tr>
             <td>
-                @item.bug.BugID
-            </td>
-            <td>
                 @item.module.ModuleID
             </td>
             <td>
                 @item.module.ModuleName
             </td>
             <td>
-                @item.module.ProjectID
+                @item.project.ProjectID
             </td>
+
+            <td>
+                @item.project.ProjectName
+            </td>
+
             <td>
                 @item.module.DeveloperID
             </td>
@@ -61,18 +64,13 @@
                 @item.module.ModuleStatus
             </td>
             <td>
-                @item.bug.BugID
+                @item.project.ProjectStatus
             </td>
         </tr>
     }
 
-</table>
-}
-<br />
-<br />
-<br />
-@Html.ActionLink("Home", "WelcomeDev", "Developer")
-@Html.ActionLink("View Modules", "Show", "Developer")
-@Html.ActionLink("Mark as done", "DevMarkDone", "Developer")
-@Html.ActionLink("View Bugs", "ViewBugs", "Developer")
-@Html.ActionLink("Log out", "MainLogin", "Login")
+</table><br/><br />
+@Html.ActionLink("Add Modules", "AssignModules1", "TeamLeader")
+@Html.ActionLink("Approve Modules", "ApproveModules", "TeamLeader")
+@Html.ActionLink("View Modules", "ViewModules", "TeamLeader")
+@Html.ActionLink("Logout", "MainLogin", "Login")

@@ -23,15 +23,17 @@
             <form>
                 <h1>Welcome @ViewBag.name</h1>
                 <h2>Id : @ViewBag.id</h2>
-                <h2>Role: Team Lead</h2>
+                <h2>Role: Tester</h2>
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    @Html.ActionLink("Raise Bug", "AddBug", "Tester")
-                    @Html.ActionLink("Logout", "MainLogin", "Login")
-
+                    @Html.ActionLink("Home", "WelcomeTester", "Tester")
+                    @Html.ActionLink("Raise a Bug", "AddBug", "Tester")
+                    @Html.ActionLink("Resolve a Bug", "AddBug", "Tester")
+                    @Html.ActionLink("View Bugs", "ViewBug", "Developer")
+                    @Html.ActionLink("Log out", "MainLogin", "Login")
                 </div>
             </div>
         </div>

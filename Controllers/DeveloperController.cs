@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReleaseManagementMVC.Models;
+using ReleaseManagementMVC.Models.temp;
+
 
 namespace ReleaseManagementMVC.Controllers
 {
@@ -16,7 +18,6 @@ namespace ReleaseManagementMVC.Controllers
         {
             return View();
         }
-        []
         public ActionResult WelcomeDev()
         {
             string devid = TempData.Peek("EmployeeKey").ToString();
@@ -69,15 +70,13 @@ namespace ReleaseManagementMVC.Controllers
             string EmpID = TempData.Peek("EmployeeKey").ToString();
 
             var joinedmodbug = from mod in dbcontext.Modules
-                               join bug in dbcontext.Bugs
-                               on mod.ModuleID equals bug.ModuleID into
-                               bugmod
-                               from bm in bugmod.DefaultIfEmpty()
-                               select new { mod.DeveloperID, bm.BugID };
+                               join bug in dbcontext.Bugs on mod.ModuleID equals bug.ModuleID into bugmod
+                               from bug in bugmod.DefaultIfEmpty()
+                               select new modbug{module=mod,bug=bug };
 
 
 
-            var viewbug = joinedmodbug.Where(x => x.DeveloperID == EmpID);
+            var viewbug = joinedmodbug.Where(x => x.module.DeveloperID == EmpID);
 
             return View(viewbug);
         }

@@ -149,6 +149,8 @@
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\temp\Assignproject.cs" />
     <Compile Include="Models\temp\joinclass.cs" />
+    <Compile Include="Models\temp\modbug.cs" />
+    <Compile Include="Models\temp\modpro.cs" />
     <Compile Include="Models\temp\Registration.cs" />
     <Compile Include="Models\temp\RegProject.cs" />
     <Compile Include="Models\Tester.cs" />
@@ -160,6 +162,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\viewstylesheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -211,9 +214,11 @@
     <Content Include="Views\Developer\Show.cshtml" />
     <Content Include="Views\Tester\ViewBug.cshtml" />
     <Content Include="Views\Tester\ViewDetails.cshtml" />
-    <Content Include="Views\Developer\ViewBugs.cshtml" />
     <Content Include="Views\Tester\Infdex.cshtml" />
     <Content Include="Views\Shared\_ViewLayout.cshtml" />
+    <Content Include="Views\Shared\_ViewPageLayout.cshtml" />
+    <Content Include="Views\TeamLeader\ViewModules.cshtml" />
+    <Content Include="Views\Developer\ViewBugs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

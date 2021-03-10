@@ -32,7 +32,6 @@ namespace ReleaseManagementMVC.Controllers
         {
             
 
-            //ViewData["EmpRole"]= new SelectList(Rolelist, "Value", "Text");
             ViewBag.EmpRole = new SelectList(Rolelist,"Value","Text"); 
 
 
@@ -54,11 +53,20 @@ namespace ReleaseManagementMVC.Controllers
                 dbcontext.SaveChanges();
                 dbcontext.Employees.Add(new Employee(registration.EmpID, registration.EmpName, registration.EmpRole));
                 dbcontext.SaveChanges();
+
+                if (registration.EmpRole == "Developer")
+                    dbcontext.Developers.Add(new Developer(registration.EmpID, registration.EmpName));
+                if (registration.EmpRole == "Tester")
+                    dbcontext.Testers.Add(new Tester(registration.EmpID, registration.EmpName, "Available"));
+                dbcontext.SaveChanges();
+                ViewBag.succ = true;
+                ViewBag.useralreadyexists = false;
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            catch (Exception e)
             {
                 ViewBag.useralreadyexists = true;
             }
+            
             return View();
 
         }

@@ -13,7 +13,14 @@ namespace ReleaseManagementMVC.Models
         public string DeveloperID { get; set; }
 
         public string DeveloperName { get; set; }
+        public Developer(string id,string name)
+        {
+            this.DeveloperID = id;
+            this.DeveloperName = name;
+        }
+        public Developer()
+        {
 
-
+        }
     }
 }

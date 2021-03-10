@@ -13,32 +13,26 @@
     <title>ApproveModules</title>
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-
-        <div class="container" id="container">
-
-            <div class="form-container log-in-container">
-                @Html.AntiForgeryToken()
-                @Html.EditorFor(model => model.ModuleID, new { htmlAttributes = new { @class = "form-control" } })
+    <div class="container" id="container">
+        <div class="form-container log-in-container">
+            @using (Html.BeginForm())
+            {
+                @Html.DropDownListFor(model => model.ModuleID, ViewBag.modlist as SelectList, new { required = "required", style = "background-color: #eee; border: none; padding: 12px 15px;margin: 8px 0; width: 100%;" })
                 <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+             }
+        </div>
 
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-right">
-                        @Html.ActionLink("Add Modules", "AssignModules1", "TeamLeader")
-                        @Html.ActionLink("Approve Modules", "ApproveModules", "TeamLeader")
-                        @Html.ActionLink("Logout", "MainLogin", "Login")
 
-                    </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    @Html.ActionLink("Add Modules", "AssignModules1", "TeamLeader")
+                    @Html.ActionLink("Approve Modules", "ApproveModules", "TeamLeader")
+                    @Html.ActionLink("View Modules", "ViewModules", "TeamLeader")
+                    @Html.ActionLink("Logout", "MainLogin", "Login")
                 </div>
             </div>
         </div>
-    }
-
-                <div>
-                    @Html.ActionLink("Back to List", "Index")
-                </div>
-    </body>
+    </div>
+</body>
 </html>

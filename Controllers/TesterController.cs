@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ReleaseManagementMVC.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ReleaseManagementMVC.Models;
-using ReleaseManagementMVC.Models.dropbox;
-using ReleaseManagementMVC.Models.temp;
 
 namespace ReleaseManagementMVC.Controllers
 {
     public class TesterController : Controller
     {
-        ReleaseManagementContext dbcontext = new ReleaseManagementContext();
+        private ReleaseManagementContext dbcontext = new ReleaseManagementContext();
+
         // GET: Tester
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult Infdex()
         {
             return View();
@@ -24,9 +22,9 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult WelcomeTester()
         {
-            string TesterID = "TE01";//TempData.Peek("EmployeeKey").ToString();
+            string TesterID = TempData.Peek("EmployeeKey").ToString();
             Tester temp = dbcontext.Testers.Single(x => x.TesterID == TesterID);
-            ViewBag.name = "Roy";// temp.TesterName;
+            ViewBag.name = TempData.Peek("EmployeeKeyName").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == TesterID).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
             ViewBag.id = TesterID;
@@ -36,10 +34,10 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult WelcomeTester(Module module)
         {
-            string TesterID = "TE01";//TempData.Peek("EmployeeKey").ToString();
+            string TesterID = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == TesterID).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
-
+            ViewBag.name = TempData.Peek("EmployeeKeyName").ToString();
 
             Module Tempmod;
             Tempmod = dbcontext.Modules.Single(x => x.ModuleID == module.ModuleID);
@@ -50,52 +48,65 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AddBug()
         {
-            string Tid = "TE01";//TempData.Peek("EmployeeKey").ToString();
+            string Tid = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == Tid).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
 
             return View();
         }
+
         [HttpPost]
         public ActionResult AddBug(Bug bug)
         {
-            string Tid = "TE01";//TempData.Peek("EmployeeKey").ToString();
+            ViewBag.succ = "";ViewBag.fail = "";
+            string Tid = TempData.Peek("EmployeeKey").ToString();
             var tempmod = dbcontext.Modules.Where(x => x.TesterID == Tid).ToList();
             ViewBag.modlist = new SelectList(tempmod, "ModuleID", "ModuleName");
-            int count=dbcontext.Bugs.Count(x=>x.BugID==bug.BugID);
-            if(count==0)
-            {               
-                dbcontext.Bugs.Add(new Bug(bug.BugID,bug.ModuleID,Tid,bug.BugStatus));
-                dbcontext.SaveChanges();
-                
-            }
-            else
-            {
-                Bug tempbug;
-                tempbug = dbcontext.Bugs.Single(x => x.BugID == bug.BugID);
-                tempbug.BugStatus = bug.BugStatus;
-                dbcontext.SaveChanges();
-            }
 
+            try
+            {
+                dbcontext.Bugs.Add(new Bug(bug.BugID, bug.ModuleID, Tid, "Bug Raised"));
+                dbcontext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                ViewBag.fail = "duplicate bug ID. Please give another ID";
+            }
+            if (ViewBag.fail == "")
+            {
+                ViewBag.succ = "Bug raised in module :" + bug.ModuleID;
+                //ViewBag.succ2 = "Developer will be notified";
+            }
+            
+
+            //Bug tempbug;
+            //tempbug = dbcontext.Bugs.Single(x => x.BugID == bug.BugID);
+            //tempbug.BugStatus = bug.BugStatus;
+            //dbcontext.SaveChanges();
 
             return View();
         }
 
         public ActionResult ViewBug()
         {
-            string EmpID = "TE01";
+            string EmpID = TempData.Peek("EmployeeKey").ToString();
             var viewbug = dbcontext.Bugs.Where(x => x.TesterID == EmpID);
+            if (viewbug.Count() == 0)
+                return View();
             return View(viewbug);
         }
 
         public ActionResult ViewDetails()
 
         {
-            string EmpID = "TE01";//TempData.Peek("EmployeeKey").ToString();
+            string EmpID = TempData.Peek("EmployeeKey").ToString();
 
             var modul = dbcontext.Modules.Where(mod => mod.TesterID == EmpID);
+            if (modul.Count() == 0)
+            {
+                return View();
+            }
             return View(modul);
         }
-
     }
 }

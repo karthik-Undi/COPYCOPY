@@ -35,6 +35,8 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult AssignModules1()
         {
+            var testerlist = dbcontext.Testers.ToList();
+            ViewBag.testerlist = new SelectList(testerlist, "TesterID", "TesterName");
             string Eid = TempData.Peek("Employeekey").ToString();
             EmployeeTeamAssignment user = dbcontext.EmployeeTeamAssignmentList.Single(emp => emp.EmpID == Eid);
 
@@ -65,6 +67,9 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult AssignModules1(Module module)
         {
+            var testerlist = dbcontext.Testers.ToList();
+            ViewBag.testerlist = new SelectList(testerlist, "TesterID", "TesterName");
+
             string Eid = TempData.Peek("Employeekey").ToString();
             EmployeeTeamAssignment user = dbcontext.EmployeeTeamAssignmentList.Single(emp => emp.EmpID == Eid);
 
@@ -114,7 +119,7 @@ namespace ReleaseManagementMVC.Controllers
 
         public ActionResult ApproveModules()
         {
-            var modlist = dbcontext.Modules.Where(x => x.ModuleStatus == "Waiting for approval");
+            var modlist = dbcontext.Modules.Where(x => x.ModuleStatus == "Waiting for TL approval");
             ViewBag.modlist = new SelectList(modlist, "ModuleID", "ModuleName");
 
             return View();
@@ -122,7 +127,7 @@ namespace ReleaseManagementMVC.Controllers
         [HttpPost]
         public ActionResult ApproveModules(Module module)
         {
-            var modlist = dbcontext.Modules.Where(x => x.ModuleStatus == "Waiting for approval");
+            var modlist = dbcontext.Modules.Where(x => x.ModuleStatus == "Waiting for TL approval");
             ViewBag.modlist = new SelectList(modlist, "ModuleID", "ModuleName");
 
             Module mod = dbcontext.Modules.Single(x => x.ModuleID == module.ModuleID);
@@ -132,5 +137,22 @@ namespace ReleaseManagementMVC.Controllers
 
             return View();
         }
+        public ActionResult ViewModules()
+        {
+            string Eid = TempData.Peek("Employeekey").ToString();
+            EmployeeTeamAssignment t = dbcontext.EmployeeTeamAssignmentList.Single(c => c.EmpID == Eid);
+            var joinedmodpro = from mod in dbcontext.Modules
+                               join pro in dbcontext.Projects on mod.ProjectID equals pro.ProjectID into modpro
+                               from pro in modpro.DefaultIfEmpty()
+                               select new modpro { module=mod,project=pro };
+
+
+            var viewmod = joinedmodpro.Where(x => x.project.TeamID == t.TeamID);
+
+            return View(viewmod);
+
+        }
+
+        
     }
 }
